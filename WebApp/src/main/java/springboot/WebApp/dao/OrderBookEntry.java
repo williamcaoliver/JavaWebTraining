@@ -1,9 +1,9 @@
 package springboot.WebApp.dao;
 
 public class OrderBookEntry {
-    private Enums.TradeActions actions = Enums.TradeActions.BUY;
-    private int price = 0;
-    private int quantity = 0;
+    private Enums.TradeActions actions;
+    private int price;
+    private int quantity;
 
     public OrderBookEntry(Enums.TradeActions actionsIn, int priceIn, int quantityIn) {
         this.actions = actionsIn;

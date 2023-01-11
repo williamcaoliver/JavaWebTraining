@@ -2,11 +2,11 @@ package springboot.WebApp.dao;
 import java.util.Date;
 
 public class Order {
-    private String accountID = "";
-    private int price = 0;
-    private int quantity = 0;
-    private Enums.TradeActions action = Enums.TradeActions.BUY;
-    private long dateTime = 0;
+    private String accountID;
+    private int price;
+    private int quantity;
+    private Enums.TradeActions action;
+    private long dateTime;
 
     public Order(String name, int priceIn, int quantityIn, Enums.TradeActions actionIn){
         this.accountID = name;
@@ -15,6 +15,13 @@ public class Order {
         this.action = actionIn;
         this.dateTime = new Date().getTime();
 
+    }
+
+    public String showData(){
+        String result = ("AccountID= "+accountID + "  " + "Price= "+price + "  " + "Quantity= "+quantity+ "  " + "Action= "+action+ "  " + "DateTime= "+dateTime);
+        System.out.print("AccountID= "+accountID + "  " + "Price= "+price + "  " + "Quantity= "+quantity+ "  " + "Action= "+action+ "  " + "DateTime= "+dateTime);
+        System.out.println();
+        return result;
     }
 
     public String getAccountID() {

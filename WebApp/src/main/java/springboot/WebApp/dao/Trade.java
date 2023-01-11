@@ -14,7 +14,12 @@ public class Trade {
         this.agreedQuantity = quantity;
         this.dateTime = new Date().getTime();
     }
-
+    public void showData(){
+        String displayBuyOrder = buyOrder.showData();
+        String displaySellOrder = sellOrder.showData();
+        System.out.print("BuyOrder= "+ displayBuyOrder+ "\n" + "SellOrder= "+displaySellOrder + "\n" + "AgreedPrice= "+agreedPrice+ "  " + "AgreedQuantity= "+agreedQuantity+ "  " + "DateTime= "+dateTime);
+        System.out.println();
+    }
     public Order getBuyOrder() {
         return buyOrder;
     }
