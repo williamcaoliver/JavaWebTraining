@@ -4,6 +4,7 @@ import springboot.WebApp.dao.*;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.ListIterator;
 
 public class Matcher {
     private ArrayList<Order> buyOrders = new ArrayList<Order>();
@@ -13,6 +14,7 @@ public class Matcher {
 
     public void addNewOrder(Order newOrder) {
         if (validateOrder(newOrder)) {
+            addOrderBookEntry(newOrder);
             System.out.println("Success");
             if (newOrder.getAction() == Enums.TradeActions.BUY) {
                 buyOrders.add(newOrder);
@@ -87,7 +89,9 @@ public class Matcher {
                 tradesList.add(tradedObj);
                 System.out.println("Matched BUY");
                 System.out.println("Matching End");
-
+                i--;
+                updateOrderBook(newOrder, currentSellOrder);
+                completeTrade(newOrder, currentSellOrder);
             }
 
 
@@ -102,12 +106,115 @@ public class Matcher {
                 tradesList.add(tradedObj);
                 System.out.println("Matched Sell");
                 System.out.println("Matching End");
+                i--;
+                updateOrderBook(currentBuyOrder, newOrder);
+                completeTrade(currentBuyOrder, newOrder);
 
             }
 
 
         }
+
+
     }
 
+
+    private void completeTrade(Order buyOrder, Order sellOrder) {
+        System.out.println("\nBefore Complete Trade\nBuyOrder: " +
+                buyOrder.showData() +
+                "\nSellOrder: " +
+                sellOrder.showData());
+
+        if (buyOrder.getQuantity() > sellOrder.getQuantity()) {
+            buyOrder.setQuantity((buyOrder.getQuantity() - sellOrder.getQuantity()));
+            sellOrder.setQuantity(0);
+        } else {
+            sellOrder.setQuantity((sellOrder.getQuantity()) - buyOrder.getQuantity());
+            buyOrder.setQuantity(0);
+
+        }
+        cleanUp(buyOrder, sellOrder);
+        System.out.println("\nAfter Complete Trade\nBuyOrder: " +
+                buyOrder.showData() +
+                "\nSellOrder: " +
+                sellOrder.showData());
+    }
+
+    private void cleanUp(Order buyOrder, Order sellOrder) {
+
+        if (buyOrder.getQuantity() == 0) {
+            buyOrders.remove(buyOrders.indexOf(buyOrder));
+        }
+        if (sellOrder.getQuantity() == 0) {
+            sellOrders.remove(sellOrders.indexOf(sellOrder));
+        }
+    }
+
+    private void addOrderBookEntry(Order newOrder) {
+        int existingEntryIndex = findExistingIndex(newOrder);
+        if (existingEntryIndex == -1) {
+            OrderBookEntry newEntry = new OrderBookEntry(newOrder.getAction(), newOrder.getPrice(), newOrder.getQuantity());
+            aggOrderBook.add(newEntry);
+            System.out.println("\nOrderBook Added: " + newOrder.showData() + "\n");
+        } else {
+            aggregateOrderBook(newOrder, existingEntryIndex);
+            System.out.println("Order Book Aggregated: ");
+        }
+        Collections.sort(aggOrderBook, new OrderBookSort());
+
+    }
+
+    private int findExistingIndex(Order newOrder) {
+        int index = -1;
+        if(aggOrderBook.size() != 0) {
+            for (OrderBookEntry item : aggOrderBook) {
+                if (newOrder.getPrice() == item.getPrice() && newOrder.getAction().equals(item.getActions())) {
+                    index = aggOrderBook.indexOf(item);
+                    break;
+                }
+
+            }
+
+        } return index;
+    }
+
+    private void aggregateOrderBook(Order newOrder, int objIndex) {
+        aggOrderBook.get(objIndex).setQuantity(aggOrderBook.get(objIndex).getQuantity() + newOrder.getQuantity());
+    }
+
+    private void updateOrderBook(Order buyOrder, Order sellOrder) {
+        int objBuyIndex = findExistingIndex(buyOrder);
+        int objSellIndex = findExistingIndex(sellOrder);
+        int orderBookBuyEntry = aggOrderBook.get(objBuyIndex).getQuantity();
+        int orderBookSellEntry = aggOrderBook.get(objSellIndex).getQuantity();
+
+        if (buyOrder.getQuantity() > sellOrder.getQuantity()) {
+            aggOrderBook.get(objBuyIndex).setQuantity(orderBookBuyEntry - sellOrder.getQuantity());
+            aggOrderBook.get(objSellIndex).setQuantity(orderBookSellEntry - sellOrder.getQuantity());
+
+        } else {
+            aggOrderBook.get(objSellIndex).setQuantity(orderBookSellEntry - buyOrder.getQuantity());
+            aggOrderBook.get(objBuyIndex).setQuantity(orderBookBuyEntry - buyOrder.getQuantity());
+        }
+        if (aggOrderBook.get(objBuyIndex).getQuantity() <= 0) {
+            aggOrderBook.remove(objBuyIndex);
+            objSellIndex = findExistingIndex(sellOrder);
+        }
+        if (aggOrderBook.get(objSellIndex).getQuantity() <= 0) {
+            aggOrderBook.remove(objSellIndex);
+        }
+    }
+
+//    public ArrayList<Order> getPrivateBook(String name) {
+//re
+//    }
+//
+//    public ArrayList<Trade> getTradesList() {
+//        return tradesList;
+//    }
+//
+//    public ArrayList<OrderBookEntry> getAggOrderBook() {
+//        return aggOrderBook;
+//    }
 
 }
