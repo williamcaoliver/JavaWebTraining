@@ -17,7 +17,7 @@ public class OrderBookSort implements Comparator<OrderBookEntry> {
         if(order1Action.compareToIgnoreCase(order2Action) < 0) {
             return -1;
         }
-        return order1.getPrice()-order2.getPrice();
+        return (order2.getPrice()-order1.getPrice());
 
     }
 

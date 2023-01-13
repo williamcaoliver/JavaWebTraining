@@ -11,6 +11,13 @@ public class OrderBookEntry {
         this.quantity = quantityIn;
     }
 
+    public String showData(){
+        String result = ("\nShowing OrderBookEntry Data: Price= "+price + "  " + "Quantity= "+quantity+ "  " + "Action= "+actions);
+        System.out.print("\nShowing OrderBookEntry Data: Price= "+price + "  " + "Quantity= "+quantity+ "  " + "Action= "+actions);
+        System.out.println();
+        return result;
+    }
+
     public Enums.TradeActions getActions() {
         return actions;
     }

@@ -17,7 +17,7 @@ public class Trade {
     public void showData(){
         String displayBuyOrder = buyOrder.showData();
         String displaySellOrder = sellOrder.showData();
-        System.out.print("BuyOrder= "+ displayBuyOrder+ "\n" + "SellOrder= "+displaySellOrder + "\n" + "AgreedPrice= "+agreedPrice+ "  " + "AgreedQuantity= "+agreedQuantity+ "  " + "DateTime= "+dateTime);
+        System.out.print("\nShowing Trade Data: BuyOrder= "+ displayBuyOrder+ "\n" + "SellOrder= "+displaySellOrder + "\n" + "AgreedPrice= "+agreedPrice+ "  " + "AgreedQuantity= "+agreedQuantity+ "  " + "DateTime= "+dateTime);
         System.out.println();
     }
     public Order getBuyOrder() {

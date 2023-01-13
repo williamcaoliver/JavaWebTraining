@@ -18,8 +18,8 @@ public class Order {
     }
 
     public String showData(){
-        String result = ("AccountID= "+accountID + "  " + "Price= "+price + "  " + "Quantity= "+quantity+ "  " + "Action= "+action+ "  " + "DateTime= "+dateTime);
-        System.out.print("AccountID= "+accountID + "  " + "Price= "+price + "  " + "Quantity= "+quantity+ "  " + "Action= "+action+ "  " + "DateTime= "+dateTime);
+        String result = ("\nShowing Order Data: AccountID= "+accountID + "  " + "Price= "+price + "  " + "Quantity= "+quantity+ "  " + "Action= "+action+ "  " + "DateTime= "+dateTime);
+        System.out.print("\nShowing Order Data: AccountID= "+accountID + "  " + "Price= "+price + "  " + "Quantity= "+quantity+ "  " + "Action= "+action+ "  " + "DateTime= "+dateTime);
         System.out.println();
         return result;
     }
