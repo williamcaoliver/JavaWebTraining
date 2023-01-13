@@ -205,6 +205,37 @@ public class Matcher {
         }
     }
 
+    public ArrayList<Order> getBuyOrders() {
+        return buyOrders;
+    }
+
+    public void setBuyOrders(ArrayList<Order> buyOrders) {
+        this.buyOrders = buyOrders;
+    }
+
+    public ArrayList<Order> getSellOrders() {
+        return sellOrders;
+    }
+
+    public void setSellOrders(ArrayList<Order> sellOrders) {
+        this.sellOrders = sellOrders;
+    }
+
+    public ArrayList<Trade> getTradesList() {
+        return tradesList;
+    }
+
+    public void setTradesList(ArrayList<Trade> tradesList) {
+        this.tradesList = tradesList;
+    }
+
+    public ArrayList<OrderBookEntry> getAggOrderBook() {
+        return aggOrderBook;
+    }
+
+    public void setAggOrderBook(ArrayList<OrderBookEntry> aggOrderBook) {
+        this.aggOrderBook = aggOrderBook;
+    }
 //    public ArrayList<Order> getPrivateBook(String name) {
 //re
 //    }

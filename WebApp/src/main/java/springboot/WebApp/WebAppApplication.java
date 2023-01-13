@@ -4,7 +4,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import springboot.WebApp.dao.Enums;
 import springboot.WebApp.dao.Order;
-import springboot.WebApp.services.Market;
 import springboot.WebApp.services.Matcher;
 
 @SpringBootApplication
@@ -12,7 +11,7 @@ public class WebAppApplication {
 
 	public static void main(String[] args) {
 		//SpringApplication.run(WebAppApplication.class, args);
-		Market matcher = new Market();
+		Matcher matcher = new Matcher();
 		Order newOrder = new Order("James", 10, 15, Enums.TradeActions.SELL);
 		Order newOrder1 = new Order("Alice", 50, 25, Enums.TradeActions.BUY);
 		Order newOrder2 = new Order("Joe", 100, 10, Enums.TradeActions.SELL);
