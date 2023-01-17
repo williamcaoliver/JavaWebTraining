@@ -1,17 +1,27 @@
 package springboot.WebApp;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import springboot.WebApp.dao.Enums;
 import springboot.WebApp.dao.Order;
+import springboot.WebApp.services.Market;
+import springboot.WebApp.services.MarketController;
 import springboot.WebApp.services.Matcher;
+import springboot.WebApp.services.OrderBook;
 
 @SpringBootApplication
 public class WebAppApplication {
 
 	public static void main(String[] args) {
 		//SpringApplication.run(WebAppApplication.class, args);
-		Matcher matcher = new Matcher();
+		Market market = new Market();
+		OrderBook orderBook = new OrderBook(market);
+		Matcher matcher = new Matcher(market, orderBook);
+
+
+
+		MarketController marketController = new MarketController(market, matcher, orderBook);
 		Order newOrder = new Order("James", 10, 15, Enums.TradeActions.SELL);
 		Order newOrder1 = new Order("Alice", 50, 25, Enums.TradeActions.BUY);
 		Order newOrder2 = new Order("Joe", 100, 10, Enums.TradeActions.SELL);
@@ -31,24 +41,24 @@ public class WebAppApplication {
 		Order newOrder16= new Order("Seb", 50, 50, Enums.TradeActions.BUY);
 		Order newOrder17= new Order("Adam", 50, 15, Enums.TradeActions.SELL);
 
-		matcher.addNewOrder(newOrder);
-		matcher.addNewOrder(newOrder1);
-		matcher.addNewOrder(newOrder2);
-		matcher.addNewOrder(newOrder3);
-		matcher.addNewOrder(newOrder4);
-		matcher.addNewOrder(newOrder5);
-		matcher.addNewOrder(newOrder6);
-		matcher.addNewOrder(newOrder7);
-		matcher.addNewOrder(newOrder8);
-		matcher.addNewOrder(newOrder9);
-		matcher.addNewOrder(newOrder10);
-		matcher.addNewOrder(newOrder11);
-		matcher.addNewOrder(newOrder12);
-		matcher.addNewOrder(newOrder13);
-		matcher.addNewOrder(newOrder14);
-		matcher.addNewOrder(newOrder15);
-		matcher.addNewOrder(newOrder16);
-		matcher.addNewOrder(newOrder17);
+		marketController.addNewOrder(newOrder);
+		marketController.addNewOrder(newOrder1);
+		marketController.addNewOrder(newOrder2);
+		marketController.addNewOrder(newOrder3);
+		marketController.addNewOrder(newOrder4);
+		marketController.addNewOrder(newOrder5);
+		marketController.addNewOrder(newOrder6);
+		marketController.addNewOrder(newOrder7);
+		marketController.addNewOrder(newOrder8);
+		marketController.addNewOrder(newOrder9);
+		marketController.addNewOrder(newOrder10);
+		marketController.addNewOrder(newOrder11);
+		marketController.addNewOrder(newOrder12);
+		marketController.addNewOrder(newOrder13);
+		marketController.addNewOrder(newOrder14);
+		marketController.addNewOrder(newOrder15);
+		marketController.addNewOrder(newOrder16);
+		marketController.addNewOrder(newOrder17);
 	}
 
 
