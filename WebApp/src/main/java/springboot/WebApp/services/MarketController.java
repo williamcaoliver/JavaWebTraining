@@ -1,19 +1,23 @@
 package springboot.WebApp.services;
 
+import lombok.ToString;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import springboot.WebApp.dao.Enums;
 import springboot.WebApp.dao.Order;
 
-import java.util.ArrayList;
-import java.util.Collections;
-
+@ToString
+@Component
 public class MarketController {
 
-    @Autowired private final Market market;
+    @Autowired
+    private final Market market;
 
-    @Autowired private final Matcher matcher;
+    @Autowired
+    private final Matcher matcher;
 
-    @Autowired private final OrderBook orderbook;
+    @Autowired
+    private final OrderBook orderbook;
 
     public MarketController(Market market, Matcher matcher, OrderBook orderbook) {
         this.market = market;
@@ -28,17 +32,19 @@ public class MarketController {
             if (newOrder.getAction() == Enums.TradeActions.BUY) {
                 market.getBuyOrders().add(newOrder);
                 System.out.println("Buy Order added to Buy Array");
-                market.getBuyOrders().forEach(Order::showData);
+                System.out.println(market.getBuyOrders());
                 market.getBuyOrders().sort(new OrderArraySortDesc());
                 System.out.println("Sorted");
-                market.getBuyOrders().forEach(Order::showData);
+                System.out.println(market.getBuyOrders());
+
             } else if (newOrder.getAction() == Enums.TradeActions.SELL) {
                 market.getSellOrders().add(newOrder);
                 System.out.println("Sell Order added to Sell Array");
-                market.getSellOrders().forEach(Order::showData);
+                System.out.println(market.getSellOrders());
                 market.getSellOrders().sort(new OrderArraySortAsc());
                 System.out.println("Sorted");
-                market.getSellOrders().forEach(Order::showData);
+                System.out.println(market.getSellOrders());
+
 
             }
 

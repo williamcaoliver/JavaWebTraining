@@ -2,17 +2,15 @@ package springboot.WebApp.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import springboot.WebApp.dao.*;
+import springboot.WebApp.dao.Enums;
+import springboot.WebApp.dao.Order;
+import springboot.WebApp.dao.Trade;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.ListIterator;
 @Service
 public class Matcher {
 
     @Autowired
     private final Market market;
-
     @Autowired
     private final OrderBook orderBook;
 
@@ -24,11 +22,11 @@ public class Matcher {
     public void matchOrders(Order newOrder) {
         if (newOrder.getAction() == Enums.TradeActions.BUY && market.getSellOrders().size() != 0) {
             matchBuyer(newOrder);
-            market.getTradesList().forEach(Trade::showData);
+            System.out.println(market.getTradesList());
             System.out.println("End");
         } else if (newOrder.getAction() == Enums.TradeActions.SELL && market.getBuyOrders().size() != 0) {
             matchSeller(newOrder);
-            market.getTradesList().forEach(Trade::showData);
+            System.out.println(market.getTradesList());
             System.out.println("End");
         } else {
             System.out.println("No match");
@@ -75,9 +73,9 @@ public class Matcher {
 
     private void completeTrade(Order buyOrder, Order sellOrder) {
         System.out.println("\nBefore Complete Trade\nBuyOrder: " +
-                buyOrder.showData() +
+                buyOrder +
                 "\nSellOrder: " +
-                sellOrder.showData());
+                sellOrder);
 
         if (buyOrder.getQuantity() > sellOrder.getQuantity()) {
             buyOrder.setQuantity((buyOrder.getQuantity() - sellOrder.getQuantity()));
@@ -89,18 +87,18 @@ public class Matcher {
         }
         cleanUp(buyOrder, sellOrder);
         System.out.println("\nAfter Complete Trade\nBuyOrder: " +
-                buyOrder.showData() +
+                buyOrder +
                 "\nSellOrder: " +
-                sellOrder.showData());
+                sellOrder);
     }
 
     private void cleanUp(Order buyOrder, Order sellOrder) {
 
         if (buyOrder.getQuantity() == 0) {
-            market.getBuyOrders().remove(market.getBuyOrders().indexOf(buyOrder));
+            market.getBuyOrders().remove(buyOrder);
         }
         if (sellOrder.getQuantity() == 0) {
-            market.getSellOrders().remove(market.getSellOrders().indexOf(sellOrder));
+            market.getSellOrders().remove(sellOrder);
         }
     }
 

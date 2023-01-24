@@ -3,25 +3,39 @@ package springboot.WebApp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import springboot.WebApp.dao.Enums;
 import springboot.WebApp.dao.Order;
-import springboot.WebApp.services.Market;
-import springboot.WebApp.services.MarketController;
-import springboot.WebApp.services.Matcher;
-import springboot.WebApp.services.OrderBook;
+import springboot.WebApp.services.*;
 
 @SpringBootApplication
 public class WebAppApplication {
 
 	public static void main(String[] args) {
-		//SpringApplication.run(WebAppApplication.class, args);
-		Market market = new Market();
-		OrderBook orderBook = new OrderBook(market);
-		Matcher matcher = new Matcher(market, orderBook);
+		ApplicationContext container = SpringApplication.run(WebAppApplication.class, args);
+		for(String s: container.getBeanDefinitionNames()){
+			System.out.println(s);
+		}
+
+//		ApplicationContext context = new AnnotationConfigApplicationContext(MatcherConfig.class);
+//		for(String i: context.getBeanDefinitionNames()){
+//			System.out.println(i);
+//		}
+		MarketController marketController = container.getBean(MarketController.class);
 
 
 
-		MarketController marketController = new MarketController(market, matcher, orderBook);
+
+
+
+//		Market market = new Market();
+//		OrderBook orderBook = new OrderBook(market);
+//		Matcher matcher = new Matcher(market, orderBook);
+//
+//
+//
+//		MarketController marketController = new MarketController(market, matcher, orderBook);
 		Order newOrder = new Order("James", 10, 15, Enums.TradeActions.SELL);
 		Order newOrder1 = new Order("Alice", 50, 25, Enums.TradeActions.BUY);
 		Order newOrder2 = new Order("Joe", 100, 10, Enums.TradeActions.SELL);

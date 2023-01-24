@@ -1,25 +1,22 @@
 package springboot.WebApp.dao;
 
+import lombok.ToString;
+
+@ToString
 public class OrderBookEntry {
-    private Enums.TradeActions actions;
+    private Enums.TradeActions action;
     private int price;
     private int quantity;
 
-    public OrderBookEntry(Enums.TradeActions actionsIn, int priceIn, int quantityIn) {
-        this.actions = actionsIn;
-        this.price = priceIn;
-        this.quantity = quantityIn;
+    public OrderBookEntry(Enums.TradeActions action, int price, int quantity) {
+        this.action = action;
+        this.price = price;
+        this.quantity = quantity;
     }
 
-    public String showData(){
-        String result = ("\nShowing OrderBookEntry Data: Price= "+price + "  " + "Quantity= "+quantity+ "  " + "Action= "+actions);
-        System.out.print("\nShowing OrderBookEntry Data: Price= "+price + "  " + "Quantity= "+quantity+ "  " + "Action= "+actions);
-        System.out.println();
-        return result;
-    }
 
-    public Enums.TradeActions getActions() {
-        return actions;
+    public Enums.TradeActions getAction() {
+        return action;
     }
 
     public int getPrice() {
@@ -30,8 +27,8 @@ public class OrderBookEntry {
         return quantity;
     }
 
-    public void setActions(Enums.TradeActions actions) {
-        this.actions = actions;
+    public void setAction(Enums.TradeActions actions) {
+        this.action = actions;
     }
 
     public void setPrice(int price) {

@@ -8,7 +8,7 @@ import springboot.WebApp.dao.OrderBookEntry;
 import java.util.Collections;
 @Service
 public class OrderBook {
-    @Autowired private final Market market;
+     @Autowired private final Market market;
 
     public OrderBook(Market market) {
         this.market = market;
@@ -19,7 +19,7 @@ public class OrderBook {
         if (existingEntryIndex == -1) {
             OrderBookEntry newEntry = new OrderBookEntry(newOrder.getAction(), newOrder.getPrice(), newOrder.getQuantity());
             market.getAggOrderBook().add(newEntry);
-            System.out.println("\nOrderBook Added: " + newOrder.showData() + "\n");
+            System.out.println("\nOrderBook Added: " + newOrder + "\n");
         } else {
             aggregateOrderBook(newOrder, existingEntryIndex);
             System.out.println("Order Book Aggregated: ");
@@ -32,7 +32,7 @@ public class OrderBook {
         int index = -1;
         if(market.getAggOrderBook().size() != 0) {
             for (OrderBookEntry item : market.getAggOrderBook()) {
-                if (newOrder.getPrice() == item.getPrice() && newOrder.getAction().equals(item.getActions())) {
+                if (newOrder.getPrice() == item.getPrice() && newOrder.getAction().equals(item.getAction())) {
                     index = market.getAggOrderBook().indexOf(item);
                     break;
                 }

@@ -1,6 +1,9 @@
 package springboot.WebApp.dao;
-import java.util.Date;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.ToString;
 
+import java.util.Date;
+@ToString
 public class Order {
     private String accountID;
     private int price;
@@ -8,21 +11,16 @@ public class Order {
     private Enums.TradeActions action;
     private long dateTime;
 
-    public Order(String name, int priceIn, int quantityIn, Enums.TradeActions actionIn){
-        this.accountID = name;
-        this.price = priceIn;
-        this.quantity = quantityIn;
-        this.action = actionIn;
+    public Order(String accountID, int price, int quantity, Enums.TradeActions action) {
+        this.accountID = accountID;
+        this.price = price;
+        this.quantity = quantity;
+        this.action = action;
         this.dateTime = new Date().getTime();
 
     }
 
-    public String showData(){
-        String result = ("\nShowing Order Data: AccountID= "+accountID + "  " + "Price= "+price + "  " + "Quantity= "+quantity+ "  " + "Action= "+action+ "  " + "DateTime= "+dateTime);
-        System.out.print("\nShowing Order Data: AccountID= "+accountID + "  " + "Price= "+price + "  " + "Quantity= "+quantity+ "  " + "Action= "+action+ "  " + "DateTime= "+dateTime);
-        System.out.println();
-        return result;
-    }
+
 
     public String getAccountID() {
         return accountID;

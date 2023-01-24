@@ -1,5 +1,8 @@
 package springboot.WebApp.dao;
+import lombok.ToString;
+
 import java.util.Date;
+@ToString
 public class Trade {
     private Order buyOrder;
     private Order sellOrder;
@@ -7,19 +10,14 @@ public class Trade {
     private int agreedQuantity;
     private long dateTime;
 
-    public Trade(Order buyersOrder, Order sellerOrder, int price, int quantity) {
-        this.buyOrder = buyersOrder;
-        this.sellOrder = sellerOrder;
-        this.agreedPrice = price;
-        this.agreedQuantity = quantity;
+    public Trade(Order buyOrder, Order sellOrder, int agreedPrice, int agreedQuantity) {
+        this.buyOrder = buyOrder;
+        this.sellOrder = sellOrder;
+        this.agreedPrice = agreedPrice;
+        this.agreedQuantity = agreedQuantity;
         this.dateTime = new Date().getTime();
     }
-    public void showData(){
-        String displayBuyOrder = buyOrder.showData();
-        String displaySellOrder = sellOrder.showData();
-        System.out.print("\nShowing Trade Data: BuyOrder= "+ displayBuyOrder+ "\n" + "SellOrder= "+displaySellOrder + "\n" + "AgreedPrice= "+agreedPrice+ "  " + "AgreedQuantity= "+agreedQuantity+ "  " + "DateTime= "+dateTime);
-        System.out.println();
-    }
+
     public Order getBuyOrder() {
         return buyOrder;
     }
