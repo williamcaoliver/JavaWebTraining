@@ -1,14 +1,26 @@
 package springboot.WebApp.services;
 
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import springboot.WebApp.dao.Enums;
 import springboot.WebApp.dao.Order;
 import springboot.WebApp.dao.OrderBookEntry;
 import springboot.WebApp.dao.Trade;
 
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+@ToString @Getter @Setter
 @Service
 public class Market {
     private ArrayList<Order> buyOrders = new ArrayList<Order>();
@@ -20,6 +32,11 @@ public class Market {
     public boolean validateOrder(Order newOrder) {
         if (newOrder == null) {
             System.out.println("The new order is Null");
+            return false;
+        }
+
+        if (newOrder.getAccountID() == null) {
+            System.out.println("The new order is Null name");
             return false;
         }
 
@@ -40,35 +57,22 @@ public class Market {
 
     }
 
-    public ArrayList<Order> getBuyOrders() {
-        return buyOrders;
+    public List<Order> getPrivateOrders(Enums.TradeActions actions, String name){
+        List<Order> filtered;
+        if(actions == Enums.TradeActions.BUY){
+             filtered = buyOrders.stream().filter((buyOrders) -> Objects.equals(buyOrders.getAccountID(), name)).toList();
+        }else{
+            filtered = sellOrders.stream().filter((sellOrders) -> Objects.equals(sellOrders.getAccountID(), name)).toList();
+        }
+        return  filtered;
     }
 
-    public void setBuyOrders(ArrayList<Order> buyOrders) {
-        this.buyOrders = buyOrders;
+    public List<Order> getPrivateOrders(String name){
+        List<Order> filteredBuy = buyOrders.stream().filter((buyOrders) -> Objects.equals(buyOrders.getAccountID(), name)).toList();
+        List<Order> filteredSell = sellOrders.stream().filter((sellOrders) -> Objects.equals(sellOrders.getAccountID(), name)).toList();
+        List<Order> filtered = Stream.concat(filteredBuy.stream(),filteredSell.stream()).collect(Collectors.toList());
+        return filtered;
+
     }
 
-    public ArrayList<Order> getSellOrders() {
-        return sellOrders;
-    }
-
-    public void setSellOrders(ArrayList<Order> sellOrders) {
-        this.sellOrders = sellOrders;
-    }
-
-    public ArrayList<Trade> getTradesList() {
-        return tradesList;
-    }
-
-    public void setTradesList(ArrayList<Trade> tradesList) {
-        this.tradesList = tradesList;
-    }
-
-    public ArrayList<OrderBookEntry> getAggOrderBook() {
-        return aggOrderBook;
-    }
-
-    public void setAggOrderBook(ArrayList<OrderBookEntry> aggOrderBook) {
-        this.aggOrderBook = aggOrderBook;
-    }
 }
