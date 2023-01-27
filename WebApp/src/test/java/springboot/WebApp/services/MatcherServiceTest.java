@@ -5,20 +5,20 @@ import org.junit.jupiter.api.Test;
 import springboot.WebApp.dao.Enums;
 import springboot.WebApp.dao.Order;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
-class MatcherTest {
+class MatcherServiceTest {
     //does need mocktio
-    Matcher matcher;
-    Market market;
-    OrderBook orderBook;
+    MatcherService matcherService;
+    MarketService marketService;
+    OrderBookService orderBookService;
     @BeforeEach
     void setup(){
-        market = mock(Market.class);
-        orderBook = mock(OrderBook.class);
-        matcher = new Matcher(market, orderBook);
+        marketService = mock(MarketService.class);
+        orderBookService = mock(OrderBookService.class);
+        //Mocking database
+        matcherService = new MatcherService(marketService, orderBookService);
     }
     @Test
     void matchOrders() {
@@ -28,7 +28,7 @@ class MatcherTest {
     @Test
     void matchBuyerCalled(){
         Order order1 = new Order("Alice", 50, 25, Enums.TradeActions.BUY);
-        matcher.matchOrders(order1);
+        matcherService.matchOrders(order1);
 
 
     }
