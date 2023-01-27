@@ -1,8 +1,8 @@
-package springboot.WebApp.services;
+package springboot.WebApp.services.SortingService;
 import springboot.WebApp.dao.Order;
 import java.util.Comparator;
 
-class OrderArraySortDesc implements Comparator<Order> {
+public class OrderArraySortDesc implements Comparator<Order> {
 
     public int compare(Order order1, Order order2){
         if (order2.getPrice() == order1.getPrice()) {

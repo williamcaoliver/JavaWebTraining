@@ -1,4 +1,4 @@
-package springboot.WebApp.services;
+package springboot.WebApp.services.SortingService;
 import springboot.WebApp.dao.Order;
 import java.util.Comparator;
 
@@ -10,5 +10,5 @@ public class OrderArraySortAsc implements Comparator<Order> {
             return dateTimeDiff;
         }
         return order1.getPrice() - order2.getPrice();
-    }
+    }//Util
 }

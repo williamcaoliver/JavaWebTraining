@@ -1,10 +1,8 @@
 package springboot.WebApp;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import springboot.WebApp.dao.Enums;
 import springboot.WebApp.dao.Order;
 import springboot.WebApp.services.*;
@@ -22,7 +20,7 @@ public class WebAppApplication {
 //		for(String i: context.getBeanDefinitionNames()){
 //			System.out.println(i);
 //		}
-		MarketController marketController = container.getBean(MarketController.class);
+		AddOrderService addOrderService = container.getBean(AddOrderService.class);
 
 
 
@@ -55,24 +53,24 @@ public class WebAppApplication {
 		Order newOrder16= new Order("Seb", 50, 50, Enums.TradeActions.BUY);
 		Order newOrder17= new Order("Adam", 50, 15, Enums.TradeActions.SELL);
 
-		marketController.addNewOrder(newOrder);
-		marketController.addNewOrder(newOrder1);
-		marketController.addNewOrder(newOrder2);
-		marketController.addNewOrder(newOrder3);
-		marketController.addNewOrder(newOrder4);
-		marketController.addNewOrder(newOrder5);
-		marketController.addNewOrder(newOrder6);
-		marketController.addNewOrder(newOrder7);
-		marketController.addNewOrder(newOrder8);
-		marketController.addNewOrder(newOrder9);
-		marketController.addNewOrder(newOrder10);
-		marketController.addNewOrder(newOrder11);
-		marketController.addNewOrder(newOrder12);
-		marketController.addNewOrder(newOrder13);
-		marketController.addNewOrder(newOrder14);
-		marketController.addNewOrder(newOrder15);
-		marketController.addNewOrder(newOrder16);
-		marketController.addNewOrder(newOrder17);
+		addOrderService.addNewOrder(newOrder);
+		addOrderService.addNewOrder(newOrder1);
+		addOrderService.addNewOrder(newOrder2);
+		addOrderService.addNewOrder(newOrder3);
+		addOrderService.addNewOrder(newOrder4);
+		addOrderService.addNewOrder(newOrder5);
+		addOrderService.addNewOrder(newOrder6);
+		addOrderService.addNewOrder(newOrder7);
+		addOrderService.addNewOrder(newOrder8);
+		addOrderService.addNewOrder(newOrder9);
+		addOrderService.addNewOrder(newOrder10);
+		addOrderService.addNewOrder(newOrder11);
+		addOrderService.addNewOrder(newOrder12);
+		addOrderService.addNewOrder(newOrder13);
+		addOrderService.addNewOrder(newOrder14);
+		addOrderService.addNewOrder(newOrder15);
+		addOrderService.addNewOrder(newOrder16);
+		addOrderService.addNewOrder(newOrder17);
 	}
 
 

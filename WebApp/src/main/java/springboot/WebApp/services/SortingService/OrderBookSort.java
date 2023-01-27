@@ -1,4 +1,4 @@
-package springboot.WebApp.services;
+package springboot.WebApp.services.SortingService;
 
 import springboot.WebApp.dao.Order;
 import springboot.WebApp.dao.OrderBookEntry;

@@ -3,18 +3,13 @@ package springboot.WebApp.services;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import springboot.WebApp.dao.Enums;
 import springboot.WebApp.dao.Order;
 import springboot.WebApp.dao.OrderBookEntry;
 import springboot.WebApp.dao.Trade;
 
-import javax.swing.*;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -22,7 +17,7 @@ import java.util.stream.Stream;
 
 @ToString @Getter @Setter
 @Service
-public class Market {
+public class MarketService {
     private ArrayList<Order> buyOrders = new ArrayList<Order>();
     private ArrayList<Order> sellOrders = new ArrayList<Order>();
     private ArrayList<Trade> tradesList = new ArrayList<Trade>();
