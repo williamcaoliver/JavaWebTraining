@@ -49,7 +49,8 @@ public class MatcherService {
 
         }
     }
-
+    //Could change the order of when the cleanup occurs making it easier to no longer i--
+    //Need to revalaute as if the arrays are sorted, then dont need to for loop through as if top does not match the rest wont.
     private void matchSeller(Order newOrder) {
         for (int i = 0; i < marketService.getBuyOrders().size(); i++) {
             Order currentBuyOrder = marketService.getBuyOrders().get(i);

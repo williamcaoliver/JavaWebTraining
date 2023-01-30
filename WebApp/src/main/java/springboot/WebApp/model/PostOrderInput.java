@@ -3,6 +3,7 @@ package springboot.WebApp.model;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -16,6 +17,6 @@ public class PostOrderInput {
     int price;
     @Min(0) @Max(1000)
     int quantity;
-    @NotEmpty
+    @NotNull
     Enums.TradeActions action;
 }
